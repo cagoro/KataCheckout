@@ -56,13 +56,12 @@ namespace KataCheckoutUnitTests
         }
 
         [Test]
-        public void SingleProduct_RulesForTheSameProductTwice()
+        public void SingleProduct_RulesForTheSameProductTwice_RuleNotApplied()
         {
             var rule = new SetOfProductsRule("AA", 1);
             var products = new List<char> { 'A' };
             Assert.AreEqual(0, rule.ConsumeProducts(products));
             Assert.AreEqual(new List<char> {'A'}, products);
         }
-
     }
 }
