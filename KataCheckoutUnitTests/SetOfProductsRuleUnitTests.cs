@@ -54,5 +54,15 @@ namespace KataCheckoutUnitTests
             Assert.AreEqual(2, rule.ConsumeProducts(products));
             Assert.AreEqual(0, products.Count);
         }
+
+        [Test]
+        public void SingleProduct_RulesForTheSameProductTwice()
+        {
+            var rule = new SetOfProductsRule("AA", 1);
+            var products = new List<char> { 'A' };
+            Assert.AreEqual(0, rule.ConsumeProducts(products));
+            Assert.AreEqual(new List<char> {'A'}, products.Count);
+        }
+
     }
 }
