@@ -8,10 +8,10 @@ namespace KataCheckoutUnitTests
     [TestFixture]
     public class CheckoutUnitTest
     {
-        
-        private int Price(string products)
+
+        private static Checkout CreateCheckOutWithPredefinedRules()
         {
-            var co = new Checkout(new List<IRule>
+            return new Checkout(new List<IRule>
             {
                 new SetOfProductsRule("AAA", 130),
                 new SetOfProductsRule("BB", 45),
@@ -20,8 +20,13 @@ namespace KataCheckoutUnitTests
                 new SetOfProductsRule("C", 20),
                 new SetOfProductsRule("D", 15),
             });
+        }
 
-            foreach (char product in products)
+        private static int Price(string products)
+        {
+            var co = CreateCheckOutWithPredefinedRules();
+
+            foreach (var product in products)
             {
                 co.Scan(product);
             }
@@ -86,5 +91,17 @@ namespace KataCheckoutUnitTests
             Assert.AreEqual(190, Price("DABABA"));
         }
 
+        [Test]
+        public void TestIncrementalsFromKataWebPage()
+        {
+            Checkout co = CreateCheckOutWithPredefinedRules();
+
+            Assert.AreEqual(0, co.Total());
+            co.Scan('A'); Assert.AreEqual(50, co.Total());
+            co.Scan('B'); Assert.AreEqual(80, co.Total());
+            co.Scan('A'); Assert.AreEqual(130, co.Total());
+            co.Scan('A'); Assert.AreEqual(160, co.Total());
+            co.Scan('B'); Assert.AreEqual(175, co.Total());
+        }
     }
 }
