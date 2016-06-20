@@ -61,7 +61,7 @@ namespace KataCheckoutUnitTests
             var rule = new SetOfProductsRule("AA", 1);
             var products = new List<char> { 'A' };
             Assert.AreEqual(0, rule.ConsumeProducts(products));
-            Assert.AreEqual(new List<char> {'A'}, products.Count);
+            Assert.AreEqual(new List<char> {'A'}, products);
         }
 
     }

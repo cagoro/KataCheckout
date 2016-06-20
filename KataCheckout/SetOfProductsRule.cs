@@ -31,14 +31,15 @@ namespace KataCheckout
 
         private bool IsRuleApplicable(List<char> products)
         {
-            foreach (var product in _productsSet)
+            var currentProductSet = new List<char>(_productsSet);
+            foreach (var product in products)
             {
-                if (!products.Contains(product))
+                if (currentProductSet.Contains(product))
                 {
-                    return false;
+                    currentProductSet.Remove(product);
                 }
             }
-            return true;
+            return currentProductSet.Count == 0;
         }
 
         private void ConsumeProductsFromProductList(List<char> products)
