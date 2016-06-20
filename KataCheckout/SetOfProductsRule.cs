@@ -1,31 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KataCheckout
 {
 
-    public class Rule
+    public class SetOfProductsRule : IRule
     {
         private readonly string _products;
         private readonly int _price;
         
 
-        public Rule(string products, int price)
+        public SetOfProductsRule(string products, int price)
         {
             _products = products;
             _price = price;
         }
 
-        public string Products
+        public int ConsumeProducts(List<char> products)
         {
-            get { return _products; }
-        }
-
-        public int Price
-        {
-            get { return _price; }
+            throw new NotImplementedException();
         }
     }
-
-
-    
 }

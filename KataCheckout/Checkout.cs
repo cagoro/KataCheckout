@@ -1,55 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace KataCheckout
 {
     public class Checkout
     {
-        private readonly Rule[] _rules;
-        private string _productsScanned;
+        private readonly List<IRule> _rulesInPriorityOrder;
+        private readonly List<char> _productsScanned;
 
-        public Checkout(Rule[] rules)
+        public Checkout(List<IRule> rulesInPriorityOrderInPriorityOrder)
         {
-            _rules = rules.OrderByDescending(x => x.Products.Length).ToArray();
-
-            _productsScanned = string.Empty;
+            _productsScanned = new List<char>();
+            _rulesInPriorityOrder = rulesInPriorityOrderInPriorityOrder;
         }
 
         public int Total()
         {
             int total = 0;
 
-            _productsScanned = String.Join("", _productsScanned.ToCharArray().OrderByDescending(x => x));
+            var currentProductsScanned = new List<char>(_productsScanned);
 
-            while (_productsScanned.Length != 0)
+            foreach (var rule in _rulesInPriorityOrder)
             {
-                total += ApplyRules();
+                total += rule.ConsumeProducts(currentProductsScanned);
             }
-
             return total;
-        }
-
-        private int ApplyRules()
-        {
-            var totalPrice = 0;
-
-            foreach (Rule rule in _rules)
-            {
-                if (_productsScanned.Contains(rule.Products))
-                {
-                    totalPrice += rule.Price;
-                    _productsScanned = _productsScanned.Replace(rule.Products, "");
-                }
-            }
-            return totalPrice;
         }
 
 
         public void Scan(char product)
         {
-            _productsScanned = _productsScanned + product;
+            _productsScanned.Add(product);
         }
     }
 }
