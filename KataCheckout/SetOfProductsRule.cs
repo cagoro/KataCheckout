@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 
 namespace KataCheckout
 {
@@ -29,7 +27,7 @@ namespace KataCheckout
             return totalPrice;
         }
 
-        private bool IsRuleApplicable(List<char> products)
+        private bool IsRuleApplicable(IEnumerable<char> products)
         {
             var currentProductSet = new List<char>(_productsSet);
             foreach (var product in products)
@@ -42,7 +40,7 @@ namespace KataCheckout
             return currentProductSet.Count == 0;
         }
 
-        private void ConsumeProductsFromProductList(List<char> products)
+        private void ConsumeProductsFromProductList(ICollection<char> products)
         {
             foreach (var product in _productsSet)
             {

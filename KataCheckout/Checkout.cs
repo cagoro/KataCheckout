@@ -15,7 +15,7 @@ namespace KataCheckout
 
         public int Total()
         {
-            int total = 0;
+            var total = 0;
 
             var currentProductsScanned = new List<char>(_productsScanned);
 
