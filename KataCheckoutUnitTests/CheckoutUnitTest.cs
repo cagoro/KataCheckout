@@ -8,16 +8,16 @@ namespace KataCheckoutUnitTests
     [TestFixture]
     public class CheckoutUnitTest
     {
-        /*
+        
         private int Price(string products)
         {
-            var co = new Checkout(new[]
+            var co = new Checkout(new List<IRule>
             {
+                new SetOfProductsRule("AAA", 130),
                 new SetOfProductsRule("A", 50),
                 new SetOfProductsRule("B", 30),
                 new SetOfProductsRule("C", 20),
                 new SetOfProductsRule("D", 15),
-                new SetOfProductsRule("AAA", 130) 
             });
 
             foreach (char product in products)
@@ -27,16 +27,14 @@ namespace KataCheckoutUnitTests
 
             return co.Total();
         }
-        */
+        
 
         [Test]
         public void NoProducts()
         {
-            var rules = new List<IRule>();
-            var checkout = new Checkout(rules);
-            Assert.AreEqual(0, checkout.Total());
+            Assert.AreEqual(0, Price(""));
         }
-        /*
+
         [Test]
         public void OneProduct()
         {
@@ -66,7 +64,6 @@ namespace KataCheckoutUnitTests
         {
             Assert.AreEqual(130, Price("AAA"));
         }
-        */
 
     }
 }
