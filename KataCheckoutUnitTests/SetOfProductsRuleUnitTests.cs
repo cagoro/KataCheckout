@@ -8,7 +8,7 @@ namespace KataCheckoutUnitTests
     public class SetOfProductsRuleUnitTests
     {
         [Test]
-        public void NoProducts()
+        public void SingleProductSingleRule()
         {
             var rule = new SetOfProductsRule("A", 1);
             var products = new List<char> { 'A'};

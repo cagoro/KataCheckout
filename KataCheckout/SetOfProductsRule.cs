@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 
 namespace KataCheckout
 {
@@ -19,18 +20,32 @@ namespace KataCheckout
 
         public int ConsumeProducts(List<char> products)
         {
+            if (IsRuleApplicable(products))
+            {
+                ConsumeProductsFromProductList(products);
+                return _price;
+            }
+            return 0;
+        }
+
+        private bool IsRuleApplicable(List<char> products)
+        {
             foreach (var product in _productsSet)
             {
                 if (!products.Contains(product))
                 {
-                    return 0;
+                    return false;
                 }
             }
+            return true;
+        }
+
+        private void ConsumeProductsFromProductList(List<char> products)
+        {
             foreach (var product in _productsSet)
             {
                 products.Remove(product);
             }
-            return _price;
         }
     }
 }
