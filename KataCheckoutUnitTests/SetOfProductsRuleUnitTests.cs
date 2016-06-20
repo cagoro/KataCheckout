@@ -36,6 +36,25 @@ namespace KataCheckoutUnitTests
             Assert.AreEqual(expectedRemainingProduts, products);
         }
 
+        [Test]
+        public void MultipleProducts_RulesForMoreThanOneProductAndAllProductsFound_RuleApplies()
+        {
+            var rule = new SetOfProductsRule("CAB", 1);
+            var products = new List<char> { 'A', 'B', 'B', 'C' };
+            var expectedRemainingProduts = new List<char> { 'B' };
+            Assert.AreEqual(1, rule.ConsumeProducts(products));
+            Assert.AreEqual(expectedRemainingProduts, products);
+        }
+
+        [Test]
+        public void MultipleProducts_RulesForMoreThanOneProductAndAllProductsFoundTwice_RuleAppliedTwicePriceIsDoubled()
+        {
+            var rule = new SetOfProductsRule("CAB", 1);
+            var products = new List<char> { 'A', 'B', 'B', 'C', 'A', 'C' };
+            Assert.AreEqual(2, rule.ConsumeProducts(products));
+            Assert.AreEqual(0, products.Count);
+        }
+
 
 
     }
