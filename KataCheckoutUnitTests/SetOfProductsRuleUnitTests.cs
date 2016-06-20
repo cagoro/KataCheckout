@@ -54,10 +54,5 @@ namespace KataCheckoutUnitTests
             Assert.AreEqual(2, rule.ConsumeProducts(products));
             Assert.AreEqual(0, products.Count);
         }
-
-
-
     }
-
-
 }

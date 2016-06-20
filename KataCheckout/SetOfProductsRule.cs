@@ -20,12 +20,13 @@ namespace KataCheckout
 
         public int ConsumeProducts(List<char> products)
         {
-            if (IsRuleApplicable(products))
+            var totalPrice = 0;
+            while (IsRuleApplicable(products))
             {
                 ConsumeProductsFromProductList(products);
-                return _price;
+                totalPrice += _price;
             }
-            return 0;
+            return totalPrice;
         }
 
         private bool IsRuleApplicable(List<char> products)
